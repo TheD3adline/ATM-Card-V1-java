@@ -1,3 +1,10 @@
+/*
+    Author: Michael Fessler
+    Date: 2023/01/17
+    Version: 0.1
+    Description:
+            Class with account relevant attributes and methods.
+ */
 public abstract class Account {
     private User user;
     private IBAN iban;
