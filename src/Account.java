@@ -6,13 +6,11 @@
             Class with account relevant attributes and methods.
  */
 public abstract class Account {
-    private User user;
     private IBAN iban;
     private BIC bic;
     private double balance;
 
-    public Account(User user, IBAN iban, BIC bic, double balance) {
-        this.user = user;
+    public Account(IBAN iban, BIC bic, double balance) {
         this.iban = iban;
         this.bic = bic;
         this.balance = balance;

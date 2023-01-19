@@ -8,8 +8,8 @@
 public class GiroAccount extends Account {
     private double limit = 1000;
 
-    public GiroAccount(User user, IBAN iban, BIC bic, double balance) {
-        super(user, iban, bic, balance);
+    public GiroAccount(double balance) {
+        super(new IBAN(), new BIC(), balance);
     }
 
     public double getLimit() {

@@ -8,8 +8,8 @@
 public class SavingsAccount extends Account {
     private double limit = 500;
 
-    public SavingsAccount(User user, IBAN iban, BIC bic, double balance) {
-        super(user, iban, bic, balance);
+    public SavingsAccount(double balance) {
+        super(new IBAN(), new BIC(), balance);
     }
 
     public double getLimit() {

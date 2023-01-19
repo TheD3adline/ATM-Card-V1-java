@@ -8,8 +8,8 @@
 public class CreditAccount extends Account {
     private double limit = 1500;
 
-    public CreditAccount(User user, IBAN iban, BIC bic, double balance) {
-        super(user, iban, bic, balance);
+    public CreditAccount(double balance) {
+        super(new IBAN(), new BIC(), balance);
     }
 
     public double getLimit() {
