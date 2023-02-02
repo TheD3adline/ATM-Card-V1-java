@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class IBAN {
-    private static ArrayList<String> IBANReg;
+    private static ArrayList<String> IBANReg = new ArrayList<>();
     private final String iban;
 
     public IBAN() {
@@ -21,8 +21,6 @@ public class IBAN {
         Random rng = new Random();
         StringBuilder sb = new StringBuilder();
         do {
-            sb.delete(0, sb.length() - 1);
-            sb.deleteCharAt(0);
             sb.append("AT00");
             for(int i = 0; i < 4; i++) {
                 sb.append(rng.nextInt(10));
@@ -30,6 +28,10 @@ public class IBAN {
             sb.append("0000");
             for(int i = 0; i < 8; i++) {
                 sb.append(rng.nextInt(10));
+            }
+            if(!isUnique(sb.toString())) {
+                sb.delete(0, sb.length() - 1);
+                sb.deleteCharAt(0);
             }
         } while(!isUnique(sb.toString()));
         return sb.toString();

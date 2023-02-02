@@ -23,4 +23,9 @@ public class UserInput {
         } while(num < cLow || num > cHigh);
         return num;
     }
+
+    public static String getStringInput(String prompt) {
+        System.out.print("\n" + prompt);
+        return sc.nextLine();
+    }
 }

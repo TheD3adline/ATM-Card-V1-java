@@ -6,7 +6,7 @@
             Sub-Class of account with methods and attributes for the savings type.
  */
 public class SavingsAccount extends Account {
-    private double limit = 500;
+    private double limit = 0;
 
     public SavingsAccount(double balance) {
         super(new IBAN(), new BIC(), balance);

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class UserNumber {
-    private static ArrayList<String> UserNumberReg;
+    private static ArrayList<String> UserNumberReg = new ArrayList<>();
     private final String userNumber;
 
     public UserNumber() {
@@ -21,10 +21,12 @@ public class UserNumber {
         Random rng = new Random();
         StringBuilder sb = new StringBuilder();
         do {
-            sb.delete(0, sb.length() - 1);
-            sb.deleteCharAt(0);
             for(int i = 0; i < 9; i++) {
                 sb.append(rng.nextInt(10));
+            }
+            if(!isUnique(sb.toString())) {
+                sb.delete(0, sb.length() - 1);
+                sb.deleteCharAt(0);
             }
         } while(!isUnique(sb.toString()));
         return sb.toString();
@@ -37,5 +39,10 @@ public class UserNumber {
             }
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return userNumber;
     }
 }
