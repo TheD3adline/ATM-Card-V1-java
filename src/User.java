@@ -11,17 +11,15 @@ import java.util.Random;
 public class User {
     private String firstName;
     private String lastName;
-    private UserNumber userNumber;
     private String pin;
     private ArrayList<GiroAccount> giroList;
     private ArrayList<CreditAccount> creditList;
     private ArrayList<SavingsAccount> savingsList;
 
 
-    public User(String firstName, String lastName, UserNumber userNumber) {
+    public User(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userNumber = userNumber;
         this.pin = assignPin();
         this.giroList = new ArrayList<>();
         this.creditList = new ArrayList<>();
@@ -65,10 +63,6 @@ public class User {
 
     public String getLastName() {
         return lastName;
-    }
-
-    public UserNumber getUserNumber() {
-        return userNumber;
     }
 
     public String getPin() {

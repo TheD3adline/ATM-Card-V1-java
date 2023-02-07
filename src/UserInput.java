@@ -50,6 +50,6 @@ public class UserInput {
 
     public static String getStringInput(String prompt) {
         System.out.print("\n" + prompt);
-        return sc.nextLine();
+        return sc.next();
     }
 }
