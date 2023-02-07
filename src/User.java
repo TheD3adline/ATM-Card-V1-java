@@ -6,7 +6,6 @@
             Class with user data and relevant methods, such as stored accounts.
  */
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Random;
 
 public class User {
@@ -17,21 +16,16 @@ public class User {
     private ArrayList<GiroAccount> giroList;
     private ArrayList<CreditAccount> creditList;
     private ArrayList<SavingsAccount> savingsList;
-    private static HashMap<String, User> userMap = new HashMap<>();
 
-    public User(String firstName, String lastName) {
+
+    public User(String firstName, String lastName, UserNumber userNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.userNumber = assignUserNumber();
+        this.userNumber = userNumber;
         this.pin = assignPin();
         this.giroList = new ArrayList<>();
         this.creditList = new ArrayList<>();
         this.savingsList = new ArrayList<>();
-        userMap.put(this.userNumber.toString(), this);
-    }
-
-    private UserNumber assignUserNumber() {
-        return new UserNumber();
     }
 
     private String assignPin() {
@@ -44,9 +38,9 @@ public class User {
     }
 
     public static boolean checkLogin(String userNumber, String pin) {
-        if(userMap.containsKey(userNumber)) {
-            if(pin.equals(userMap.get(userNumber).getPin())) {
-                System.out.println("Login successful! Welcome back " + userMap.get(userNumber).getFirstName() + "!");
+        if(Main.userMap.containsKey(userNumber)) {
+            if(pin.equals(Main.userMap.get(userNumber).getPin())) {
+                System.out.println("Login successful! Welcome back " + Main.userMap.get(userNumber).getFirstName() + "!");
                 return true;
             }
         }

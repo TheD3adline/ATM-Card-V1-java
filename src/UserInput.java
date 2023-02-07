@@ -13,8 +13,32 @@ public class UserInput {
         int num;
         do {
             while(!sc.hasNextInt()) {
-                System.err.println("Invalid Input!");
                 sc.next();
+                System.err.println("Invalid Input!");
+            }
+            num = sc.nextInt();
+            if(num < cLow || num > cHigh) {
+                System.err.println("Invalid Input!");
+            }
+        } while(num < cLow || num > cHigh);
+        return num;
+    }
+    public static int getMenuInput(int cLow, int cHigh) {
+        int num;
+        do {
+            System.out.print("\nPlease select menu point! (Input ");
+            for(int i = cLow; i <= cHigh; i++) {
+                System.out.print(i + ", ");
+            }
+            System.out.print("): ");
+            while(!sc.hasNextInt()) {
+                sc.next();
+                System.err.println("Invalid Input!");
+                System.out.print("\nPlease select menu point! (Input ");
+                for(int i = cLow; i <= cHigh; i++) {
+                    System.out.print(i + ", ");
+                }
+                System.out.print("): ");
             }
             num = sc.nextInt();
             if(num < cLow || num > cHigh) {

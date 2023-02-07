@@ -5,21 +5,40 @@
     Description:
             Bank account practice app.
  */
+import java.util.HashMap;
 public class Main {
+    public static HashMap<String, User> userMap = new HashMap<>();
     public static void main(String[] args) {
 
-        User user = new User("Michael", "Fessler");
-        System.out.println("Hello " + user.getFirstName() + " " + user.getLastName() + "!\n" +
-                "For practice purposes: Your user number is " + user.getUserNumber() + ", " +
-                "and your pin for the login is " + user.getPin());
 
-        if (User.checkLogin(UserInput.getStringInput("Enter User Number: "),
-                UserInput.getStringInput("Enter Pin: "))) {
-            if(user.makeNewAccount()) {
-                System.out.println("yay");
-            } else {
-                System.out.println("nay");
+
+        while(true) {
+            UserInterface.printMainUI();
+            switch(UserInput.getMenuInput(1,3)) {
+                case 1: break;
+                case 2:
+                    boolean flag;
+                    if (User.checkLogin(UserInput.getStringInput("Enter User Number: "),
+                            UserInput.getStringInput("Enter Pin: "))) {
+                        flag = false;
+                        do {
+                            switch (UserInput.getMenuInput(1, 7)) {
+                                case 1:
+                                    //user.makeNewAccount();
+                                    break;
+                                case 6:
+                                    System.out.println("Logging out...");
+                                    flag = true;
+                                    break;
+                                case 7:
+                                    System.exit(0);
+                            }
+                        } while (!flag);
+                    }
+                    break;
+                case 3: System.exit(0);
             }
+
         }
     }
 }
