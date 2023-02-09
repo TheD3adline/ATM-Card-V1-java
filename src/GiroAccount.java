@@ -7,6 +7,7 @@
  */
 public class GiroAccount extends Account {
     private double limit = 1000;
+    private String type = "Giro Account";
 
     public GiroAccount(double balance) {
         super(new IBAN(), new BIC(), balance);

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 public class Main {
     public static HashMap<String, User> userMap = new HashMap<>();
+    public static User activeUser;
     public static void main(String[] args) {
 
         while(true) {
@@ -29,16 +30,15 @@ public class Main {
                             UserInput.getStringInput("Enter Pin: "))) {
                         flag = false;
                         do {
+                            UserInterface.printUserUI();
                             switch (UserInput.getMenuInput(1, 7)) {
-                                case 1:
-                                    //user.makeNewAccount();
-                                    break;
-                                case 6:
+                                case 1 -> activeUser.makeNewAccount();
+                                //case 2 -> ;
+                                case 6 -> {
                                     System.out.println("Logging out...");
                                     flag = true;
-                                    break;
-                                case 7:
-                                    System.exit(0);
+                                }
+                                case 7 -> System.exit(0);
                             }
                         } while (!flag);
                     }

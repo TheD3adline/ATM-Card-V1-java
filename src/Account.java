@@ -15,4 +15,9 @@ public abstract class Account {
         this.bic = bic;
         this.balance = balance;
     }
+
+    public void deposit(double deposition) {
+        balance = balance + deposition;
+        System.out.println("Successfully deposited ");
+    }
 }

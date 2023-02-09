@@ -39,6 +39,7 @@ public class User {
         if(Main.userMap.containsKey(userNumber)) {
             if(pin.equals(Main.userMap.get(userNumber).getPin())) {
                 System.out.println("Login successful! Welcome back " + Main.userMap.get(userNumber).getFirstName() + "!");
+                Main.activeUser = Main.userMap.get(userNumber);
                 return true;
             }
         }
@@ -46,14 +47,13 @@ public class User {
         return false;
     }
 
-    public boolean makeNewAccount() {
+    public void makeNewAccount() {
         System.out.println("1. Giro Account \n2. Credit Account \n3. Savings Account \n4. Return");
-        switch(UserInput.getInputInt(1, 4)) {
-            case 1: giroList.add(new GiroAccount(0)); return true;
-            case 2: creditList.add(new CreditAccount(0)); return true;
-            case 3: savingsList.add(new SavingsAccount(0)); return true;
-            case 4: return false;
-            default: System.err.println("Unknown Error!"); return false;
+        switch (UserInput.getMenuInput(1, 3)) {
+            case 1 -> giroList.add(new GiroAccount(0));
+            case 2 -> creditList.add(new CreditAccount(0));
+            case 3 -> savingsList.add(new SavingsAccount(0));
+            default -> System.err.println("Unknown Error!");
         }
     }
 

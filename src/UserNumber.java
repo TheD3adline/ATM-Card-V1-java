@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class UserNumber {
-    private static ArrayList<String> UserNumberReg = new ArrayList<>();
+    private static ArrayList<String> userNumberReg = new ArrayList<>();
     private final String userNumber;
 
     public UserNumber() {
         this.userNumber = getUserNumber();
-        UserNumberReg.add(this.userNumber);
+        userNumberReg.add(this.userNumber);
     }
 
     private String getUserNumber() {
@@ -33,8 +33,8 @@ public class UserNumber {
     }
 
     private boolean isUnique(String userNumber) {
-        for(int i = 0; i < UserNumberReg.size(); i++) {
-            if(userNumber.equals(UserNumberReg.get(i))) {
+        for(int i = 0; i < userNumberReg.size(); i++) {
+            if(userNumber.equals(userNumberReg.get(i))) {
                 return false;
             }
         }
