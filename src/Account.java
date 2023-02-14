@@ -5,10 +5,12 @@
     Description:
             Class with account relevant attributes and methods.
  */
+import java.text.DecimalFormat;
 public abstract class Account {
-    private IBAN iban;
-    private BIC bic;
-    private double balance;
+    protected IBAN iban;
+    protected BIC bic;
+    protected double balance;
+    protected static DecimalFormat df2 = new DecimalFormat();
 
     public Account(IBAN iban, BIC bic, double balance) {
         this.iban = iban;
@@ -16,8 +18,8 @@ public abstract class Account {
         this.balance = balance;
     }
 
-    public void deposit(double deposition) {
-        balance = balance + deposition;
-        System.out.println("Successfully deposited ");
-    }
+    public abstract void deposit(double deposition);
+    public abstract void withdraw(double withdrawal);
+    public abstract String getType();
+    public abstract double getLimit();
 }

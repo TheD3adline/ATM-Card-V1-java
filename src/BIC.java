@@ -15,4 +15,9 @@ public class BIC {
         LocalDateTime year = LocalDateTime.now();
         this.bic = "AUTBBRZ" + dtf.format(year);
     }
+
+    @Override
+    public String toString() {
+        return bic;
+    }
 }

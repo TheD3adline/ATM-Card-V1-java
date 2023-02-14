@@ -11,13 +11,6 @@ public class Main {
     public static HashMap<String, User> userMap = new HashMap<>();
     public static User activeUser;
 
-    public static final int[] indexArr = {3, 8, 4, 26, 13, 8, 13, 0, 26, 8, 18, 26,
-                                            0, 26, 5, 4, 18, 2, 7, 4, 26, 12, 0, 20, 18};
-
-    public static final char[] alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-                                            'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
-                                            's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' '};
-
     public static void main(String[] args) {
 
         while(true) {

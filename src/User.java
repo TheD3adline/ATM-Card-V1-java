@@ -5,6 +5,7 @@
     Description:
             Class with user data and relevant methods, such as stored accounts.
  */
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -15,6 +16,7 @@ public class User {
     private ArrayList<GiroAccount> giroList;
     private ArrayList<CreditAccount> creditList;
     private ArrayList<SavingsAccount> savingsList;
+    private static DecimalFormat df2 = new DecimalFormat();
 
 
     public User(String firstName, String lastName) {
@@ -38,7 +40,8 @@ public class User {
     public static boolean checkLogin(String userNumber, String pin) {
         if(Main.userMap.containsKey(userNumber)) {
             if(pin.equals(Main.userMap.get(userNumber).getPin())) {
-                System.out.println("Login successful! Welcome back " + Main.userMap.get(userNumber).getFirstName() + "!");
+                System.out.println("Login successful! Welcome back " +
+                                    Main.userMap.get(userNumber).getFirstName() + "!");
                 Main.activeUser = Main.userMap.get(userNumber);
                 return true;
             }
@@ -54,6 +57,43 @@ public class User {
             case 2 -> creditList.add(new CreditAccount(0));
             case 3 -> savingsList.add(new SavingsAccount(0));
             default -> System.err.println("Unknown Error!");
+        }
+    }
+
+    public void depositToAcc() {
+        System.out.println("""
+                Select account type to deposit to:\s
+                1. Giro Accounts\s
+                2. Credit Accounts\s
+                3. Savings Accounts""");
+        switch(UserInput.getMenuInput(1,3)) {
+            case 1 -> listGiroAccounts(giroList);
+            case 2 -> listCreditAccounts(creditList);
+            case 3 -> listSavingsAccounts(savingsList);
+        }
+    }
+
+    public void listGiroAccounts(ArrayList<GiroAccount> list) {
+        for(int i = 0; i < list.size() - 1; i++) {
+            System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() + " €" +
+                                df2.format(list.get(i).balance) + "|| Limit: " +
+                                (df2.format(list.get(i).getLimit() * -1))
+                                );
+        }
+    }
+
+    public void listCreditAccounts(ArrayList<CreditAccount> list) {
+        for(int i = 0; i < list.size() - 1; i++) {
+            System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() + " €" +
+                    df2.format(list.get(i).balance) + "|| Limit: " +
+                    (df2.format(list.get(i).getLimit() * -1)));
+        }
+    }
+
+    public void listSavingsAccounts(ArrayList<SavingsAccount> list) {
+        for(int i = 0; i < list.size() - 1; i++) {
+            System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() + " €" +
+                    df2.format(list.get(i).balance));
         }
     }
 
