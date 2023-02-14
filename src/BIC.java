@@ -7,6 +7,7 @@
  */
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+
 public class BIC {
     private final String bic;
 

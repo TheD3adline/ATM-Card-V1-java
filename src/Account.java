@@ -6,6 +6,7 @@
             Class with account relevant attributes and methods.
  */
 import java.text.DecimalFormat;
+
 public abstract class Account {
     protected IBAN iban;
     protected BIC bic;

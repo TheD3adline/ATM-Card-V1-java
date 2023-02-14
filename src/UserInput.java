@@ -6,6 +6,7 @@
             Class to handle all user inputs.
  */
 import java.util.Scanner;
+
 public class UserInput {
     private static final Scanner sc = new Scanner(System.in);
 

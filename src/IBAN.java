@@ -7,6 +7,7 @@
  */
 import java.util.ArrayList;
 import java.util.Random;
+
 public class IBAN {
     private static ArrayList<String> IBANReg = new ArrayList<>();
     private final String iban;

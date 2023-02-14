@@ -60,40 +60,59 @@ public class User {
         }
     }
 
-    public void depositToAcc() {
+    public void accountsMenu() {
         System.out.println("""
-                Select account type to deposit to:\s
+                Select account type:\s
                 1. Giro Accounts\s
                 2. Credit Accounts\s
                 3. Savings Accounts""");
         switch(UserInput.getMenuInput(1,3)) {
-            case 1 -> listGiroAccounts(giroList);
-            case 2 -> listCreditAccounts(creditList);
-            case 3 -> listSavingsAccounts(savingsList);
+            case 1 -> {
+                if(giroList.size() > 0) {
+                    accessGiroAccounts(giroList);
+                } else {
+                    System.out.println("You do not have any giro accounts!");
+                }
+            }
+            case 2 -> {
+                if(creditList.size() > 0) {
+                    accessCreditAccounts(creditList);
+                } else {
+                    System.out.println("You do not have any credit accounts!");
+                }
+            }
+            case 3 -> {
+                if(savingsList.size() > 0) {
+                    accessSavingsAccounts(savingsList);
+                } else {
+                    System.out.println("You do not have any savings accounts!");
+                }
+            }
         }
     }
 
-    public void listGiroAccounts(ArrayList<GiroAccount> list) {
+    public void accessGiroAccounts(ArrayList<GiroAccount> list) {
         for(int i = 0; i < list.size() - 1; i++) {
-            System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() + " €" +
-                                df2.format(list.get(i).balance) + "|| Limit: " +
-                                (df2.format(list.get(i).getLimit() * -1))
-                                );
+            System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() +
+                                " Balance: €" + df2.format(list.get(i).balance) + "|| Limit: €" +
+                                (df2.format(list.get(i).getLimit() * -1)) +
+                                "|| Total: €" + df2.format(list.get(i).balance + list.get(i).getLimit()));
         }
     }
 
-    public void listCreditAccounts(ArrayList<CreditAccount> list) {
+    public void accessCreditAccounts(ArrayList<CreditAccount> list) {
         for(int i = 0; i < list.size() - 1; i++) {
-            System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() + " €" +
-                    df2.format(list.get(i).balance) + "|| Limit: " +
-                    (df2.format(list.get(i).getLimit() * -1)));
+            System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() +
+                                " Balance: €" + df2.format(list.get(i).balance) + "|| Limit: €" +
+                                (df2.format(list.get(i).getLimit() * -1)) +
+                                "|| Total: €" + df2.format(list.get(i).balance + list.get(i).getLimit()));
         }
     }
 
-    public void listSavingsAccounts(ArrayList<SavingsAccount> list) {
+    public void accessSavingsAccounts(ArrayList<SavingsAccount> list) {
         for(int i = 0; i < list.size() - 1; i++) {
-            System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() + " €" +
-                    df2.format(list.get(i).balance));
+            System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() +
+                    " Balance: €" + df2.format(list.get(i).balance));
         }
     }
 

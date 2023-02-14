@@ -5,8 +5,8 @@
     Description:
             Bank account practice app.
  */
-import java.util.ArrayList;
 import java.util.HashMap;
+
 public class Main {
     public static HashMap<String, User> userMap = new HashMap<>();
     public static User activeUser;
