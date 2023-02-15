@@ -49,6 +49,22 @@ public class UserInput {
         return num;
     }
 
+    public static double getDoubleInput(String prompt, double cLow, double cHigh) {
+        double num;
+        do {
+            System.out.println(prompt);
+            while(!sc.hasNextDouble()) {
+                sc.next();
+                System.err.println("Invalid Input!");
+            }
+            num = sc.nextDouble();
+            if(num < cLow || num > cHigh) {
+                System.err.println("Invalid Input!");
+            }
+        } while(num < cLow || num > cHigh);
+        return num;
+    }
+
     public static String getStringInput(String prompt) {
         System.out.print("\n" + prompt);
         return sc.next();
