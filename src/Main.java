@@ -36,6 +36,10 @@ public class Main {
                                 case 1 -> activeUser.makeNewAccount();
                                 case 2 -> activeUser.accountsMenu("Enter amount to deposit: ",
                                                                     TransactionType.DEPOSITION);
+                                case 3 -> activeUser.accountsMenu("Enter amount to withdraw (min €10,-): ",
+                                                                    TransactionType.WITHDRAWAL);
+                                //case 4 -> account statement;
+                                //case 5 -> suspend account;
                                 case 6 -> {
                                     System.out.println("Logging out...");
                                     flag = true;
@@ -43,6 +47,7 @@ public class Main {
                                 case 7 -> System.exit(0);
                             }
                         } while (!flag);
+                        activeUser = null;
                     }
                     break;
                 case 3: System.exit(0);
