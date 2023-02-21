@@ -32,4 +32,8 @@ public class Transaction {
         }
         return dateTime.format(dateTimeFormat) + " - " + amount + "";
     }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
 }

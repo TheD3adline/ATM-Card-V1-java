@@ -16,6 +16,7 @@ public class User {
     private ArrayList<GiroAccount> giroList;
     private ArrayList<CreditAccount> creditList;
     private ArrayList<SavingsAccount> savingsList;
+    private ArrayList<Transaction> transactionHistory = new ArrayList<>();
     private static DecimalFormat df2 = new DecimalFormat();
 
 
@@ -60,7 +61,7 @@ public class User {
         }
     }
 
-    public void accountsMenu() {
+    public void accountsMenu(String prompt, TransactionType transaction) {
         System.out.println("""
                 Select account type:\s
                 1. Giro Accounts\s
@@ -69,21 +70,21 @@ public class User {
         switch(UserInput.getMenuInput(1,3)) {
             case 1 -> {
                 if(giroList.size() > 0) {
-                    accessGiroAccounts(giroList);
+                    accessGiroAccounts(giroList, prompt, transaction);
                 } else {
                     System.out.println("You do not have any giro accounts!");
                 }
             }
             case 2 -> {
                 if(creditList.size() > 0) {
-                    accessCreditAccounts(creditList);
+                    accessCreditAccounts(creditList, prompt, transaction);
                 } else {
                     System.out.println("You do not have any credit accounts!");
                 }
             }
             case 3 -> {
                 if(savingsList.size() > 0) {
-                    accessSavingsAccounts(savingsList);
+                    accessSavingsAccounts(savingsList, prompt, transaction);
                 } else {
                     System.out.println("You do not have any savings accounts!");
                 }
@@ -91,28 +92,63 @@ public class User {
         }
     }
 
-    public void accessGiroAccounts(ArrayList<GiroAccount> list) {
+    public void accessGiroAccounts(ArrayList<GiroAccount> list, String prompt, TransactionType transaction) {
+        for(int i = 0; i < list.size() - 1; i++) {
+            System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() +
+                                " Balance: €" + df2.format(list.get(i).balance) + "|| Limit: €" +
+                                (df2.format(list.get(i).getLimit() * - 1)) +
+                                "|| Total: €" + df2.format(list.get(i).balance + list.get(i).getLimit()));
+        }
+        if(transaction == TransactionType.DEPOSITION) {
+            int selection = UserInput.getMenuInput(0, list.size() - 1);
+            double amount = UserInput.getDoubleInput(prompt, 0, Double.MAX_VALUE);
+            list.get(selection).deposit(amount);
+            transactionHistory.add(new Transaction(amount, TransactionType.DEPOSITION));
+        } else if (transaction == TransactionType.WITHDRAWAL) {
+            int selection = UserInput.getMenuInput(0, list.size() - 1);
+            double amount = UserInput.getDoubleInput(prompt, 10,
+                    (list.get(selection).balance + list.get(selection).getLimit()));
+            list.get(selection).deposit(amount);
+            transactionHistory.add(new Transaction(amount, TransactionType.WITHDRAWAL));
+        }
+    }
+
+    public void accessCreditAccounts(ArrayList<CreditAccount> list, String prompt, TransactionType transaction) {
         for(int i = 0; i < list.size() - 1; i++) {
             System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() +
                                 " Balance: €" + df2.format(list.get(i).balance) + "|| Limit: €" +
                                 (df2.format(list.get(i).getLimit() * -1)) +
                                 "|| Total: €" + df2.format(list.get(i).balance + list.get(i).getLimit()));
         }
-    }
-
-    public void accessCreditAccounts(ArrayList<CreditAccount> list) {
-        for(int i = 0; i < list.size() - 1; i++) {
-            System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() +
-                                " Balance: €" + df2.format(list.get(i).balance) + "|| Limit: €" +
-                                (df2.format(list.get(i).getLimit() * -1)) +
-                                "|| Total: €" + df2.format(list.get(i).balance + list.get(i).getLimit()));
+        if(transaction == TransactionType.DEPOSITION) {
+            int selection = UserInput.getMenuInput(0, list.size() - 1);
+            double amount = UserInput.getDoubleInput(prompt, 0, Double.MAX_VALUE);
+            list.get(selection).deposit(amount);
+            transactionHistory.add(new Transaction(amount, TransactionType.DEPOSITION));
+        } else if (transaction == TransactionType.WITHDRAWAL) {
+            int selection = UserInput.getMenuInput(0, list.size() - 1);
+            double amount = UserInput.getDoubleInput(prompt, 10,
+                    (list.get(selection).balance + list.get(selection).getLimit()));
+            list.get(selection).deposit(amount);
+            transactionHistory.add(new Transaction(amount, TransactionType.WITHDRAWAL));
         }
     }
 
-    public void accessSavingsAccounts(ArrayList<SavingsAccount> list) {
+    public void accessSavingsAccounts(ArrayList<SavingsAccount> list, String prompt, TransactionType transaction) {
         for(int i = 0; i < list.size() - 1; i++) {
             System.out.println((i + 1) + ". " + list.get(i).getType() + " " + list.get(i).iban.toString() +
                     " Balance: €" + df2.format(list.get(i).balance));
+        }
+        if(transaction == TransactionType.DEPOSITION) {
+            int selection = UserInput.getMenuInput(0, list.size() - 1);
+            double amount = UserInput.getDoubleInput(prompt, 0, Double.MAX_VALUE);
+            list.get(selection).deposit(amount);
+            transactionHistory.add(new Transaction(amount, TransactionType.DEPOSITION));
+        } else if (transaction == TransactionType.WITHDRAWAL) {
+            int selection = UserInput.getMenuInput(0, list.size() - 1);
+            double amount = UserInput.getDoubleInput(prompt, 10, (list.get(selection).balance));
+            list.get(selection).deposit(amount);
+            transactionHistory.add(new Transaction(amount, TransactionType.WITHDRAWAL));
         }
     }
 

@@ -34,7 +34,8 @@ public class Main {
                             UserInterface.printUserUI();
                             switch (UserInput.getMenuInput(1, 7)) {
                                 case 1 -> activeUser.makeNewAccount();
-                                //case 2 -> ;
+                                case 2 -> activeUser.accountsMenu("Enter amount to deposit: ",
+                                                                    TransactionType.DEPOSITION);
                                 case 6 -> {
                                     System.out.println("Logging out...");
                                     flag = true;
